@@ -1,0 +1,64 @@
+name: Update brew
+on:
+  repository_dispatch:
+    types: [update-brew] # with client_payload.packages
+  workflow_dispatch:
+    inputs:
+      formula:
+        description: 'update target formula'
+        required: true
+        default: ''
+      description:
+        description: 'formula description'
+        required: true
+        default: ''
+      url:
+        description: 'Download URL'
+        required: true
+        default: ''
+      sha256:
+        description: 'checksum'
+        required: true
+        default: ''
+      version:
+        description: 'version'
+        required: true
+        default: ''
+jobs:
+  update-brew:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup Node
+        uses: actions/setup-node@v1
+      - name: Update formula
+        run: |
+          ./scripts/update.js\
+            "${{ github.event.client_payload.formula }}"\
+            "${{ github.event.client_payload.description }}"\
+            "${{ github.event.client_payload.url }}"\
+            "${{ github.event.client_payload.sha256 }}"\
+            "${{ github.event.client_payload.version }}"
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Update packages'
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: feature/update-package
+          branch-suffix: timestamp
+          delete-branch: true
+          title: '${{ github.event.client_payload.formula }} update for ${{ github.event.client_payload.version }}'
+          body: |
+            @${{ github.actor }}
+            ```
+            ${{ github.event.client_payload.formula }} update for ${{ github.event.client_payload.version }}
+            ```
+      - name: Check Pull Request
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
