@@ -1,8 +1,9 @@
 class DisplayRotate < Formula
-  desc "Rotate your display easily via command-line on macOS using displayplacer."
-  homepage "https://github.com/aromarious/display-rotate"
-  url "https://github.com/aromarious/display-rotate/archive/refs/tags/v1.0.2.tar.gz"
-  sha256 "26e6597cff5eb6e98362e362b9ea0cc79c17be2d4685e6994a8b99f9fd755ae8"
+  desc "Rotate your display easily on macOS CLI using displayplacer."
+  homepage "https://github.com/aromarious/{{ formula }}"
+  url {{ url}}
+  sha256 "d69acb4dec4fa6beb3a78fc042ecdc5ec71840e5cf44c708bd71e6e40c132330"
+  version "20241207-1130"
   license "ISC"
 
   depends_on "node"
