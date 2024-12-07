@@ -1,0 +1,18 @@
+class SidecarLauncher < Formula
+  desc "{{ description }}"
+  homepage "{{ homepage }}"
+  url "{{ url }}"
+  sha256 "{{ sha256 }}"
+  version "{{ version }}"
+  license "{{ license }}"
+
+  def install
+    ohai "Installing SidecarLauncher..."
+    libexec.install "SidecarLauncer"
+    bin.install_symlink libexec/"bin/SidecarLauncher"
+  end
+
+  test do
+    system "#{bin}/SidecarLauncher", "--version"
+  end
+end
