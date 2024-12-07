@@ -44,12 +44,7 @@ jobs:
           URL=${{ github.event.inputs.url || github.event.client_payload.url }}
           SHA256=${{ github.event.inputs.sha256 || github.event.client_payload.sha256 }}
           VERSION=${{ github.event.inputs.version || github.event.client_payload.version }}
-          ./scripts/update.js\
-            "${{ github.event.client_payload.formula }}"\
-            "${{ github.event.client_payload.description }}"\
-            "${{ github.event.client_payload.url }}"\
-            "${{ github.event.client_payload.sha256 }}"\
-            "${{ github.event.client_payload.version }}"
+          ./scripts/update.js $FORMULA $DESCRIPTION $URL $SHA256 $VERSION
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3
@@ -62,11 +57,11 @@ jobs:
           branch: feature/update-package
           branch-suffix: timestamp
           delete-branch: true
-          title: '${{ github.event.client_payload.formula }} update for ${{ github.event.client_payload.version }}'
+          title: '${{ github.event.inputs.formula || github.event.client_payload.formula }} update for ${{ github.event.inputs.version || github.event.client_payload.version }}'
           body: |
             @${{ github.actor }}
             ```
-            ${{ github.event.client_payload.formula }} update for ${{ github.event.client_payload.version }}
+            ${{ github.event.inputs.formula || github.event.client_payload.formula }} update for ${{ github.event.inputs.version || github.event.client_payload.version }}
             ```
       - name: Check Pull Request
         run: |
