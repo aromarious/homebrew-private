@@ -11,17 +11,14 @@ const main = ({ formula, description, url, sha256, version }) => {
     exit(1)
   }
   const template = fs.readFileSync(formulaTemplatePath(formula)).toString()
-  const code = template
   const replaceMap = { formula, description, url, sha256, version }
-  Object.entries(replaceMap).reduce((code, [key, value]) => {
-    const regex = new RegExp(`{{\\s*${key}\\s*}}`, "g")
-    console.log(`📌 ${key}: ${value}, ${regex.source} -> "${value}"`)
-    code = code.replace(regex, `"${value}"`)
-    console.log(`🌼 ${code}`)
+  const code = Object.entries(replaceMap).reduce((code, [key, value]) => {
+    code = code.replace(regex, value)
     return code
-  }, code)
+  }, template)
   fs.writeFileSync(formulaPath(formula), code)
-};
+}
 
-const [, , formula, description, url, sha256, version] = process.argv;
-main({ formula, description, url, sha256, version });
+const [, , formula, description, homepage, url, sha256, version, license] =
+  process.argv
+main({ formula, description, homepage, url, sha256, version, license })

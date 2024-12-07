@@ -12,6 +12,10 @@ on:
         description: 'formula description'
         required: true
         default: 'Rotate your display easily via command-line on macOS using displayplacer.'
+      homepage:
+        description: 'homepage'
+        required: true
+        default: 'https://github.com/aromarious/display-rotate'
       url:
         description: 'Download URL'
         required: true
@@ -36,10 +40,11 @@ jobs:
         run: |
           FORMULA="${{ github.event.inputs.formula || github.event.client_payload.formula }}"
           DESCRIPTION="${{ github.event.inputs.description || github.event.client_payload.description }}"
+          HOMEPAGE="${{ github.event.inputs.homepage || github.event.client_payload.homepage }}"
           URL="${{ github.event.inputs.url || github.event.client_payload.url }}"
           SHA256="${{ github.event.inputs.sha256 || github.event.client_payload.sha256 }}"
           VERSION="${{ github.event.inputs.version || github.event.client_payload.version }}"
-          ./scripts/update.js "$FORMULA" "$DESCRIPTION" "$URL" "$SHA256" "$VERSION"
+          ./scripts/update.js "$FORMULA" "$DESCRIPTION" "$HOMEPAGE" "$URL" "$SHA256" "$VERSION"
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3
