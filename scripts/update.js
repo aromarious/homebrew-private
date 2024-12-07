@@ -2,7 +2,7 @@
 const fs = require("fs");
 const { exit } = require("process");
 
-const formulaTemplatePath = (name) => `template/${name}.rb.tmpl`;
+const formulaTemplatePath = (name) => `templates/${name}.rb.tmpl`;
 const formulaPath = (name) => `Formula/${name}.rb`;
 
 const main = ({ formula, description, url, sha256, version }) => {
