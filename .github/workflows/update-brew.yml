@@ -39,12 +39,12 @@ jobs:
           ls -l scripts/update.js
       - name: Update formula
         run: |
-          FORMULA=${{ github.event.inputs.formula || github.event.client_payload.formula }}
-          DESCRIPTION=${{ github.event.inputs.description || github.event.client_payload.description }}
-          URL=${{ github.event.inputs.url || github.event.client_payload.url }}
-          SHA256=${{ github.event.inputs.sha256 || github.event.client_payload.sha256 }}
-          VERSION=${{ github.event.inputs.version || github.event.client_payload.version }}
-          ./scripts/update.js $FORMULA $DESCRIPTION $URL $SHA256 $VERSION
+          FORMULA="${{ github.event.inputs.formula || github.event.client_payload.formula }}"
+          DESCRIPTION="${{ github.event.inputs.description || github.event.client_payload.description }}"
+          URL="${{ github.event.inputs.url || github.event.client_payload.url }}"
+          SHA256="${{ github.event.inputs.sha256 || github.event.client_payload.sha256 }}"
+          VERSION="${{ github.event.inputs.version || github.event.client_payload.version }}"
+          ./scripts/update.js "$FORMULA" "$DESCRIPTION" "$URL" "$SHA256" "$VERSION"
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3
