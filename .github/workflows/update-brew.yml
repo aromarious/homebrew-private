@@ -7,31 +7,34 @@ on:
       formula:
         description: 'update target formula'
         required: true
-        default: ''
+        default: 'displayplacer'
       description:
         description: 'formula description'
         required: true
-        default: ''
+        default: 'Rotate your display easily via command-line on macOS using displayplacer.'
       url:
         description: 'Download URL'
         required: true
-        default: ''
+        default: 'https://github.com/aromarious/display-rotate/releases/download/v1.0.0/display-rotate-1.0.2.tar.gz'
       sha256:
         description: 'checksum'
         required: true
-        default: ''
+        default: '26e6597cff5eb6e98362e362b9ea0cc79c17be2d4685e6994a8b99f9fd755ae8'
       version:
         description: 'version'
         required: true
-        default: ''
+        default: 'v1.0.2'
 jobs:
   update-brew:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latestpp
     steps:
       - name: checkout
         uses: actions/checkout@v2
       - name: setup Node
         uses: actions/setup-node@v1
+      - name: show pwd
+        run: |
+          pwd
       - name: Update formula
         run: |
           ./scripts/update.js\
