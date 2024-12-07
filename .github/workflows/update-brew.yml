@@ -35,7 +35,8 @@ jobs:
       - name: show pwd, ls
         run: |
           pwd
-          ls -l scripts
+          ls -l .
+          ls -l s*s
       - name: Update formula
         run: |
           ./scripts/update.js\
