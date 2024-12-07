@@ -39,6 +39,11 @@ jobs:
           ls -l scripts/update.js
       - name: Update formula
         run: |
+          FORMULA=${{ github.event.inputs.formula || github.event.client_payload.formula }}
+          DESCRIPTION=${{ github.event.inputs.description || github.event.client_payload.description }}
+          URL=${{ github.event.inputs.url || github.event.client_payload.url }}
+          SHA256=${{ github.event.inputs.sha256 || github.event.client_payload.sha256 }}
+          VERSION=${{ github.event.inputs.version || github.event.client_payload.version }}
           ./scripts/update.js\
             "${{ github.event.client_payload.formula }}"\
             "${{ github.event.client_payload.description }}"\
