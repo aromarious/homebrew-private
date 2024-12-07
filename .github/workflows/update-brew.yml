@@ -32,11 +32,6 @@ jobs:
         uses: actions/checkout@v2
       - name: setup Node
         uses: actions/setup-node@v1
-      - name: show pwd, ls
-        run: |
-          pwd
-          ls -l .
-          ls -l scripts/update.js
       - name: Update formula
         run: |
           FORMULA="${{ github.event.inputs.formula || github.event.client_payload.formula }}"
