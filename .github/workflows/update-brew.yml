@@ -44,7 +44,8 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.TAPTOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # token: ${{ secrets.TAPTOKEN }}
           commit-message: 'Update packages'
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
