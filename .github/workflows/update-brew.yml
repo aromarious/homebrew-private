@@ -28,6 +28,10 @@ on:
         description: 'version'
         required: true
         default: 'v1.0.2'
+      license:
+        description: 'license'
+        required: true
+        default: 'ISC'
 jobs:
   update-brew:
     runs-on: ubuntu-latest
@@ -44,7 +48,8 @@ jobs:
           URL="${{ github.event.inputs.url || github.event.client_payload.url }}"
           SHA256="${{ github.event.inputs.sha256 || github.event.client_payload.sha256 }}"
           VERSION="${{ github.event.inputs.version || github.event.client_payload.version }}"
-          ./scripts/update.js "$FORMULA" "$DESCRIPTION" "$HOMEPAGE" "$URL" "$SHA256" "$VERSION"
+          LICENSE="${{ github.event.inputs.license || github.event.client_payload.license }}"
+          ./scripts/update.js "$FORMULA" "$DESCRIPTION" "$HOMEPAGE" "$URL" "$SHA256" "$VERSION" "$LICENSE"
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3
