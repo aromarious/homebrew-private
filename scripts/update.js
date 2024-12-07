@@ -15,7 +15,10 @@ const main = ({ formula, description, url, sha256, version }) => {
   const replaceMap = { formula, description, url, sha256, version }
   Object.entries(replaceMap).reduce((code, [key, value]) => {
     const regex = new RegExp(`{{\\s*${key}\\s*}}`, "g")
-    return code.replace(regex, `"${value}"`)
+    console.log(`📌 ${key}: ${value}, ${regex.source} -> "${value}"`)
+    code = code.replace(regex, `"${value}"`)
+    console.log(`🌼 ${code}`)
+    return code
   }, code)
   fs.writeFileSync(formulaPath(formula), code)
 };
