@@ -7,18 +7,17 @@ const formulaPath = (name) => `Formula/${name}.rb`;
 
 const main = ({ formula, description, url, sha256, version }) => {
   if (!fs.existsSync(formulaTemplatePath(formula))) {
-    console.error(`Error: ${formulaTemplatePath(formula)} is not exists`);
-    exit(1);
+    console.error(`Error: ${formulaTemplatePath(formula)} is not exists`)
+    exit(1)
   }
-
-  const template = fs.readFileSync(formulaTemplatePath(formula)).toString();
+  const template = fs.readFileSync(formulaTemplatePath(formula)).toString()
   const code = template
-    .replace(/{{\s?description\s?}}/, `"${description}"`)
-    .replace("{{ url }}", `"${url}"`)
-    .replace("{{ sha256 }}", `"${sha256}"`)
-    .replace("{{ version }}", `"${version}"`);
-
-  fs.writeFileSync(formulaPath(formula), code);
+  const replaceMap = { formula, description, url, sha256, version }
+  Object.entries(replaceMap).reduce((code, [key, value]) => {
+    const regex = new RegExp(`{{\\s*${key}\\s*}}`, "g")
+    return code.replace(regex, `"${value}"`)
+  }, code)
+  fs.writeFileSync(formulaPath(formula), code)
 };
 
 const [, , formula, description, url, sha256, version] = process.argv;
