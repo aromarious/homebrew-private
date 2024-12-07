@@ -7,7 +7,7 @@ on:
       formula:
         description: 'update target formula'
         required: true
-        default: 'displayplacer'
+        default: 'display-placer'
       description:
         description: 'formula description'
         required: true
