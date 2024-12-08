@@ -1,0 +1,24 @@
+class TestProduct < Formula
+  desc "{{ description }}"
+  homepage "{{ homepage }}"
+  url "{{ url }}"
+  sha256 "{{ sha256 }}"
+  version "{{ version }}"
+  license "{{ license }}"
+
+  depends_on "node"
+  depends_on "displayplacer"
+
+  def install
+    ohai "Installing test-product..."
+    libexec.install "package.json", "package-lock.json", "bin", "dist"
+    Dir.chdir(libexec) do
+      mv "bin/display-rotate", "bin/test-product"
+    end
+    bin.install_symlink libexec/"bin/test-product"
+  end
+
+  test do
+    system "#{bin}/test-product", "--version"
+  end
+end
