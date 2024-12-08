@@ -12,6 +12,9 @@ class TestProduct < Formula
   def install
     ohai "Installing test-product..."
     libexec.install "package.json", "package-lock.json", "bin", "dist"
+    Dir.chdir(libexec) do
+      mv "bin/display-rotate", "bin/test-product"
+    end
     bin.install_symlink libexec/"bin/test-product"
   end
 
