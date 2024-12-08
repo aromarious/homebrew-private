@@ -1,4 +1,4 @@
-# 12/8/2024, 10:25:58 AM
+# 12/8/2024, 10:34:41 AM
 class SidecarLauncher < Formula
   desc "A commandline tool to connect to a Sidecar capable device."
   homepage "https://github.com/Ocasio-J/SidecarLauncher"
@@ -9,7 +9,7 @@ class SidecarLauncher < Formula
 
   def install
     ohai "Installing SidecarLauncher..."
-    libexec.install "SidecarLauncher"
+    libexec.install "SidecarLauncer"
     bin.install_symlink libexec/"SidecarLauncher"
   end
 
