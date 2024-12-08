@@ -42,6 +42,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           architecture: arm64
+          node-version: 20
       - name: Install Brew
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -57,6 +58,11 @@ jobs:
           VERSION="${{ github.event.client_payload.version || github.event.inputs.version }}"
           LICENSE="${{ github.event.client_payload.license || github.event.inputs.license }}"
           ./scripts/update.js "$FORMULA" "$DESCRIPTION" "$HOMEPAGE" "$URL" "$SHA256" "$VERSION" "$LICENSE"
+
+      - name: Install Formula
+        run: brew install --formula ./Formula/${{ github.event.client_payload.formula || github.event.inputs.formula }}.rb
+      - name: Run Formula Tests
+        run: brew test ${{ github.event.client_payload.formula || github.event.inputs.formula }}
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3
