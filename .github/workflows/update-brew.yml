@@ -39,7 +39,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
+        with:
+          architecture: arm64
       - name: Update formula
         run: |
           FORMULA="${{ github.event.client_payload.formula || github.event.inputs.formula }}"
