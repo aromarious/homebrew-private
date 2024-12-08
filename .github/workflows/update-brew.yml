@@ -36,19 +36,19 @@ jobs:
   update-brew:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: setup Node
+      - name: Setup Node
         uses: actions/setup-node@v1
       - name: Update formula
         run: |
-          FORMULA="${{ github.event.inputs.formula || github.event.client_payload.formula }}"
-          DESCRIPTION="${{ github.event.inputs.description || github.event.client_payload.description }}"
-          HOMEPAGE="${{ github.event.inputs.homepage || github.event.client_payload.homepage }}"
-          URL="${{ github.event.inputs.url || github.event.client_payload.url }}"
-          SHA256="${{ github.event.inputs.sha256 || github.event.client_payload.sha256 }}"
-          VERSION="${{ github.event.inputs.version || github.event.client_payload.version }}"
-          LICENSE="${{ github.event.inputs.license || github.event.client_payload.license }}"
+          FORMULA="${{ github.event.client_payload.formula || github.event.inputs.formula }}"
+          DESCRIPTION="${{ github.event.client_payload.description || github.event.inputs.description }}"
+          HOMEPAGE="${{ github.event.client_payload.homepage || github.event.inputs.homepage }}"
+          URL="${{ github.event.client_payload.url || github.event.inputs.url }}"
+          SHA256="${{ github.event.client_payload.sha256 || github.event.inputs.sha256 }}"
+          VERSION="${{ github.event.client_payload.version || github.event.inputs.version }}"
+          LICENSE="${{ github.event.client_payload.license || github.event.inputs.license }}"
           ./scripts/update.js "$FORMULA" "$DESCRIPTION" "$HOMEPAGE" "$URL" "$SHA256" "$VERSION" "$LICENSE"
       - name: Create Pull Request
         id: cpr
@@ -62,11 +62,11 @@ jobs:
           branch: feature/update-package
           branch-suffix: timestamp
           delete-branch: true
-          title: '${{ github.event.inputs.formula || github.event.client_payload.formula }} update for ${{ github.event.inputs.version || github.event.client_payload.version }}'
+          title: '${{ github.event.client_payload.formula || github.event.inputs.formula }} update for ${{ github.event.client_payload.version || github.event.inputs.version }}'
           body: |
             @${{ github.actor }}
             ```
-            ${{ github.event.inputs.formula || github.event.client_payload.formula }} update for ${{ github.event.inputs.version || github.event.client_payload.version }}
+            ${{ github.event.client_payload.formula || github.event.inputs.formula }} update for ${{ github.event.client_payload.version || github.event.inputs.version }}
             ```
       - name: Check Pull Request
         run: |
