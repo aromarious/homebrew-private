@@ -1,4 +1,4 @@
-# 12/8/2024, 10:37:15 AM
+# 12/8/2024, 11:48:25 AM
 class SidecarLauncher < Formula
   desc "A commandline tool to connect to a Sidecar capable device."
   homepage "https://github.com/Ocasio-J/SidecarLauncher"
