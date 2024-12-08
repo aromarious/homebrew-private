@@ -7,11 +7,11 @@ on:
       formula:
         description: 'update target formula'
         required: true
-        default: 'display-rotate'
+        default: 'test-product'
       description:
         description: 'formula description'
         required: true
-        default: 'Rotate your display easily via command-line on macOS using displayplacer.'
+        default: 'test product decsciption'
       homepage:
         description: 'homepage'
         required: true
