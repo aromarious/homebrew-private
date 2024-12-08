@@ -9,7 +9,7 @@ class SidecarLauncher < Formula
 
   def install
     ohai "Installing SidecarLauncher..."
-    libexec.install "SidecarLauncer"
+    libexec.install "SidecarLauncher"
     bin.install_symlink libexec/"SidecarLauncher"
   end
 
