@@ -1,2 +1,2 @@
 .env
-Formula/*.rb
+./Formula

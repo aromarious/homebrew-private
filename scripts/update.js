@@ -42,7 +42,10 @@ const main = ({
     code = code.replace(regex, value)
     return code
   }, template)
-  fs.writeFileSync(formulaPath(formula), code)
+  fs.writeFileSync(
+    formulaPath(formula),
+    `# ${new Date().toLocaleString()}\n` + code
+  )
 }
 
 const [, , formula, description, homepage, url, sha256, version, license] =
