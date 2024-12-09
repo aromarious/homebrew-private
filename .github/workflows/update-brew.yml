@@ -78,6 +78,13 @@ jobs:
             @${{ github.actor }}
             ```
             ${{ github.event.client_payload.formula || github.event.inputs.formula }} update for ${{ github.event.client_payload.version || github.event.inputs.version }}
+            - **Formula:** ${{ github.event.client_payload.formula || github.event.inputs.formula }}
+            - **Description:** ${{ github.event.client_payload.description || github.event.inputs.description }}
+            - **Homepage:** ${{ github.event.client_payload.homepage || github.event.inputs.homepage }}
+            - **URL:** ${{ github.event.client_payload.url || github.event.inputs.url }}
+            - **SHA256:** ${{ github.event.client_payload.sha256 || github.event.inputs.sha256 }}
+            - **Version:** ${{ github.event.client_payload.version || github.event.inputs.version }}
+            - **License:** ${{ github.event.client_payload.license || github.event.inputs.license }}
             ```
       - name: Check Pull Request
         run: |
