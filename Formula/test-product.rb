@@ -1,4 +1,4 @@
-# 12/9/2024, 12:16:31 AM
+# 12/9/2024, 12:22:15 AM
 class TestProduct < Formula
   desc "test product decsciption"
   homepage "https://github.com/aromarious/display-rotate"
