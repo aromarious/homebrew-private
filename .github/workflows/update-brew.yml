@@ -19,7 +19,7 @@ on:
       url:
         description: 'Download URL'
         required: true
-        default: 'https://github.com/aromarious/display-rotate/releases/download/v1.0.0/display-rotate-1.0.2.tar.gz'
+        default: 'https://github.com/aromarious/display-rotate/archive/refs/tags/v1.0.2.tar.gz'
       sha256:
         description: 'checksum'
         required: true
