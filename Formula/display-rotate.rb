@@ -11,6 +11,9 @@ class DisplayRotate < Formula
   depends_on "displayplacer"
 
   def install
+    ohai "Building display-rotate..."
+    system "npm", "install"
+    system "npm", "run", "build"
     ohai "Installing display-rotate..."
     libexec.install "package.json", "package-lock.json", "bin", "dist"
     bin.install_symlink libexec/"bin/display-rotate"
