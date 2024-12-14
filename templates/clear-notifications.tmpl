@@ -1,0 +1,19 @@
+class ClearNotifications < Formula
+  desc "{{ description }}"
+  homepage "{{ homepage }}"
+  url "{{ url }}"
+  sha256 "{{ sha256 }}"
+  version "{{ version }}"
+  license "{{ license }}"
+
+  def install
+    ohai "Installing {{ formula }}..."
+    libexec.install "clear-notifications"
+    libexec.install "clear-notifications.applescript"
+    bin.install_symlink libexec/"clear-notifications"
+  end
+
+  test do
+    system "#{bin}/clear-notifications", "--version"
+  end
+end
