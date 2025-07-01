@@ -1,0 +1,19 @@
+class KeychainTools < Formula
+  desc "{{ description }}"
+  homepage "{{ homepage }}"
+  url "{{ url }}"
+  sha256 "{{ sha256 }}"
+  version "{{ version }}"
+  license "{{ license }}"
+
+  def install
+    ohai "Installing {{ formula }}..."
+    bin.install "kc-get", "kc-list", "kc-set"
+  end
+
+  test do
+    # Test that commands exist and show usage when called without proper arguments
+    assert_match "Usage:", shell_output("#{bin}/kc-get 2>&1", 1)
+    assert_match "Usage:", shell_output("#{bin}/kc-set 2>&1", 1)
+  end
+end
