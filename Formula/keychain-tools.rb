@@ -1,10 +1,10 @@
-# 7/1/2025, 6:50:53 AM
+# 7/11/2025, 4:48:45 AM
 class KeychainTools < Formula
   desc "macOSキーチェーン操作用CLIツール群"
   homepage "https://github.com/aromarious/keychain-tools"
-  url "https://github.com/aromarious/keychain-tools/archive/refs/tags/v1.0.1.tar.gz"
-  sha256 "0055862098b0cad4325b3b884427a4ca2ad8594eb0edfb779ec5c587e4fb2131"
-  version "v1.0.1"
+  url "https://github.com/aromarious/keychain-tools/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "3ceed4b508033e655f3c1d38f289c093385341c2bfefc5b30e766ded58395a11"
+  version "v1.1.0"
   license "MIT"
 
   def install
